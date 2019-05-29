@@ -1,5 +1,5 @@
 import { FETCHING, SUCCESS, FAILURE } from "../actions";
-const initialState = {
+const initialState =  {
   characters: [],
   // Array characters, Boolean fetching, null error.
   fetching: false,
@@ -19,13 +19,12 @@ export const charsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
-        characters: action.payload
+        characters: [...state.characters, ...action.payload]
       }    
       case FAILURE:
       return {
         ...state,
         fetching: false
-  
       }
     default:
       return state;

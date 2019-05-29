@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // we'll need to create 3 different action types here.
 // one for fetching, one for success and one for failure
+
 export const FETCHING = "FETCHING";
 export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";
@@ -12,22 +13,45 @@ export const FAILURE = "FAILURE";
 // remember that now we have controll over our thunk-based action creator
 
 export const getCharacters = () => dispatch => {
-    //dispatch the "start" action
+    const request = axios.get('https://swapi.co/api/people/');
     dispatch({ type: FETCHING });
-    //start the API call
-    axios
-        .get('https://swapi.co/api/people/')
-        .then(res => {
-            dispatch({
-                type: FETCHING,
-                payload: res.data
-            })
+    request
+        .then(({ data }) => {
+            dispatch({ 
+                type: SUCCESS, 
+                payload: data.results
+            });
         })
         .catch(err => {
-            console.log(err.response)
-            dispatch({
-                type: FAILURE,
-                payload: err
-            })
-        })
+            dispatch({ 
+                type: FAILURE, 
+                error: err 
+            });
+        });
 }
+
+
+/*
+export const FETCHING = "FETCHING";
+export const SUCCESS = "SUCCESS";
+export const FAILURE = "FAILURE";
+
+export const getCharacters = () => dispatch => {
+  dispatch({ type: FETCHING });
+  axios
+    .get("https://swapi.co/api/people")
+    .then(({ data }) => {
+      dispatch({
+        type: SUCCESS,
+        payload: data.results
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: FAILURE,
+        payload: err
+      });
+    });
+};
+*/
+
