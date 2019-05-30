@@ -14,18 +14,26 @@ export const FAILURE = "FAILURE";
 
 export const getCharacters = () => dispatch => {
     const request = axios.get('https://swapi.co/api/people/');
+    console.log(`here is the API request $`);
     dispatch({ type: FETCHING });
     request
-        .then(({ data }) => {
-            dispatch({ 
-                type: SUCCESS, 
-                payload: data.results
+        // .then(({ data }) => {
+        //     dispatch({ 
+        //         type: SUCCESS, 
+        //         payload: data.response
+        //     });
+        // })
+        .then(response => {
+            dispatch({
+              type: SUCCESS,
+              payload: response.data
+
             });
-        })
-        .catch(err => {
+          })
+        .catch(error => {
             dispatch({ 
                 type: FAILURE, 
-                error: err 
+                error: console.log(error)
             });
         });
 }

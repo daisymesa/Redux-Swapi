@@ -5,12 +5,12 @@ import Character from "./Character";
 const CharacterList = props => {
   return (
     <div className="placeholder-div">
-      {console.log(`array for CharacterList: ${props.characters}`)}
+      {/* {console.log(`array for CharacterList: ${props.characters}`)} */}
       <h1>Character List Component</h1>
     <ul>
-      {/* {props.characters.map(character => {
+      {props.characters.map(character => {
         return <Character key={character.name} character={character} />;
-      })} */}
+      })}
     </ul>
     </div>
   );
